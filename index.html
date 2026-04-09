@@ -1,0 +1,1436 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+  <title>Maliz Design — Lizandra Alves</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap"
+    rel="stylesheet">
+
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --cream: #F5F2EE;
+      --warm-white: #FAF8F5;
+      --charcoal: #2C2B29;
+      --mid: #7A7570;
+      --accent: #C5A98B;
+      --accent-dark: #9E7D5E;
+      --light-line: rgba(44, 43, 41, 0.12);
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Jost', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--charcoal);
+      font-family: var(--sans);
+      font-weight: 300;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── LOADER ── */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: var(--charcoal);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 20px;
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+
+    #loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loader-logo {
+      font-family: var(--serif);
+      color: var(--cream);
+      font-size: 2rem;
+      letter-spacing: 0.15em;
+      font-weight: 300;
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .loader-logo span {
+      font-weight: 600;
+    }
+
+    .loader-line {
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      animation: expandLine 1.2s ease 0.3s forwards;
+    }
+
+    @keyframes expandLine {
+      to {
+        width: 120px;
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(12px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(245, 242, 238, 0.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--light-line);
+      transition: transform 0.4s ease;
+    }
+
+    nav.hidden {
+      transform: translateY(-100%);
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      letter-spacing: 0.12em;
+      font-weight: 400;
+      color: var(--charcoal);
+      text-decoration: none;
+    }
+
+    .nav-logo em {
+      font-style: normal;
+      font-weight: 300;
+      color: var(--mid);
+    }
+
+    .hamburger {
+      width: 28px;
+      height: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+
+    .hamburger span {
+      display: block;
+      height: 1px;
+      background: var(--charcoal);
+      transition: transform 0.35s ease, opacity 0.35s ease, width 0.35s ease;
+      transform-origin: left;
+    }
+
+    .hamburger span:nth-child(2) {
+      width: 70%;
+    }
+
+    .hamburger.open span:nth-child(1) {
+      transform: rotate(45deg) translate(2px, -1px);
+    }
+
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.open span:nth-child(3) {
+      transform: rotate(-45deg) translate(2px, 1px);
+    }
+
+    /* ── MOBILE MENU ── */
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 99;
+      background: var(--charcoal);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease;
+    }
+
+    .mobile-menu.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-menu a {
+      font-family: var(--serif);
+      font-size: 2.4rem;
+      font-weight: 300;
+      color: var(--cream);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      position: relative;
+      transition: color 0.3s;
+    }
+
+    .mobile-menu a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    .mobile-menu a:active {
+      color: var(--accent);
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 24px 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, #EDE9E3 0%, #F8F5F0 60%, #E8E2D9 100%);
+    }
+
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      top: -30%;
+      right: -20%;
+      width: 70vw;
+      height: 70vw;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(197, 169, 139, 0.18) 0%, transparent 70%);
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--sans);
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      animation: fadeInUp 0.7s ease 1.2s forwards;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 30px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .hero-h1 {
+      font-family: var(--serif);
+      font-size: clamp(3.2rem, 16vw, 5rem);
+      font-weight: 300;
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+      color: var(--charcoal);
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 1.4s forwards;
+    }
+
+    .hero-h1 em {
+      display: block;
+      font-style: italic;
+      color: var(--accent-dark);
+      font-weight: 300;
+    }
+
+    .hero-sub {
+      margin-top: 20px;
+      font-size: 0.8rem;
+      line-height: 1.7;
+      color: var(--mid);
+      max-width: 300px;
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 1.6s forwards;
+    }
+
+    .hero-cta {
+      margin-top: 36px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      animation: fadeInUp 0.8s ease 1.8s forwards;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--charcoal);
+      color: var(--cream);
+      padding: 14px 28px;
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 40px;
+      transition: background 0.3s, transform 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .btn-primary:active {
+      transform: scale(0.97);
+      background: var(--accent-dark);
+    }
+
+    .hero-scroll {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mid);
+      text-decoration: none;
+    }
+
+    .hero-img-wrap {
+      position: absolute;
+      top: 60px;
+      right: -10px;
+      width: 55vw;
+      max-width: 240px;
+      height: 65vw;
+      max-height: 290px;
+      border-radius: 120px 120px 60px 120px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #DDD6CC, #C5A98B55);
+      z-index: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-size: 0.75rem;
+      color: var(--mid);
+      letter-spacing: 0.1em;
+    }
+
+    .hero-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ── SECTION BASE ── */
+    section {
+      padding: 80px 24px;
+      position: relative;
+    }
+
+    .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.62rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--accent-dark);
+      margin-bottom: 28px;
+    }
+
+    .label::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(2.2rem, 10vw, 3rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--accent-dark);
+    }
+
+    .divider {
+      width: 48px;
+      height: 1px;
+      background: var(--accent);
+      margin: 32px 0;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--warm-white);
+    }
+
+    .about-text {
+      font-size: 0.92rem;
+      line-height: 1.85;
+      color: var(--mid);
+    }
+
+    .about-photo {
+      width: 100%;
+      aspect-ratio: 4/5;
+      border-radius: 16px 80px 16px 80px;
+      background: linear-gradient(135deg, #DDD6CC, #C5A98B55);
+      margin-bottom: 36px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-size: 0.8rem;
+      color: var(--mid);
+      letter-spacing: 0.1em;
+    }
+
+    .about-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--light-line);
+      border: 1px solid var(--light-line);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-top: 36px;
+    }
+
+    .stat {
+      background: var(--warm-white);
+      padding: 24px 20px;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: var(--serif);
+      font-size: 2.2rem;
+      font-weight: 300;
+      color: var(--charcoal);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      color: var(--mid);
+      margin-top: 6px;
+      text-transform: uppercase;
+    }
+
+    /* ── PORTFOLIO ── */
+    #portfolio {
+      background: var(--charcoal);
+    }
+
+    #portfolio .label {
+      color: var(--accent);
+    }
+
+    #portfolio .label::before {
+      background: var(--accent);
+    }
+
+    #portfolio .section-title {
+      color: var(--cream);
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .portfolio-item {
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .portfolio-item:first-child {
+      grid-column: 1 / -1;
+      border-radius: 16px;
+    }
+
+    .portfolio-thumb {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, #3D3B38, #2C2B29);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-size: 0.75rem;
+      color: rgba(245, 242, 238, 0.3);
+      letter-spacing: 0.12em;
+      overflow: hidden;
+    }
+
+    .portfolio-item:first-child .portfolio-thumb {
+      aspect-ratio: 16/9;
+    }
+
+    .portfolio-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .portfolio-info {
+      padding: 14px 4px 4px;
+    }
+
+    .portfolio-name {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--cream);
+      line-height: 1.2;
+    }
+
+    .portfolio-cat {
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-top: 3px;
+    }
+
+    /* ── PACKAGES ── */
+    #packages {
+      background: var(--cream);
+    }
+
+    .pkg-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .pkg-card {
+      border: 1px solid var(--light-line);
+      border-radius: 20px;
+      overflow: hidden;
+      background: var(--warm-white);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .pkg-head {
+      padding: 28px 24px 20px;
+      border-bottom: 1px solid var(--light-line);
+      position: relative;
+    }
+
+    .pkg-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--charcoal);
+      color: var(--cream);
+      font-size: 0.6rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 20px;
+    }
+
+    .pkg-card.featured .pkg-badge {
+      background: var(--accent-dark);
+    }
+
+    .pkg-name {
+      font-size: 0.62rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 8px;
+    }
+
+    .pkg-title {
+      font-family: var(--serif);
+      font-size: 1.8rem;
+      font-weight: 300;
+    }
+
+    .pkg-title em {
+      font-style: italic;
+      color: var(--accent-dark);
+    }
+
+    .pkg-tagline {
+      font-size: 0.82rem;
+      color: var(--mid);
+      margin-top: 8px;
+      line-height: 1.5;
+    }
+
+    .pkg-body {
+      padding: 24px;
+    }
+
+    .pkg-price {
+      font-family: var(--serif);
+      font-size: 2.8rem;
+      font-weight: 300;
+      color: var(--charcoal);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .pkg-price sup {
+      font-size: 1.2rem;
+      vertical-align: super;
+      margin-right: 3px;
+    }
+
+    .pkg-for {
+      font-size: 0.72rem;
+      color: var(--mid);
+      margin-bottom: 24px;
+    }
+
+    .pkg-items {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .pkg-items li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.82rem;
+      color: var(--charcoal);
+      line-height: 1.4;
+    }
+
+    .pkg-items li::before {
+      content: '';
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    .pkg-footer {
+      padding: 20px 24px;
+      border-top: 1px solid var(--light-line);
+    }
+
+    .btn-pkg {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      text-align: center;
+      font-family: var(--sans);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border-radius: 40px;
+      border: 1.5px solid var(--charcoal);
+      color: var(--charcoal);
+      background: transparent;
+      text-decoration: none;
+      transition: background 0.3s, color 0.3s;
+      -webkit-tap-highlight-color: transparent;
+      cursor: pointer;
+    }
+
+    .pkg-card.featured .btn-pkg {
+      background: var(--charcoal);
+      color: var(--cream);
+    }
+
+    .btn-pkg:active {
+      opacity: 0.75;
+    }
+
+    /* ── ITENS AVULSOS ── */
+    #itens {
+      background: var(--warm-white);
+    }
+
+    .itens-intro {
+      font-size: 0.85rem;
+      color: var(--mid);
+      line-height: 1.7;
+      margin-bottom: 32px;
+    }
+
+    .itens-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: var(--light-line);
+      border: 1px solid var(--light-line);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .item-row {
+      background: var(--warm-white);
+      padding: 16px 14px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .item-name {
+      font-size: 0.78rem;
+      color: var(--charcoal);
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+
+    .item-price {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--accent-dark);
+    }
+
+    /* ── PROCESS ── */
+    #process {
+      background: var(--cream);
+    }
+
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 8px;
+      position: relative;
+    }
+
+    .steps::before {
+      content: '';
+      position: absolute;
+      left: 17px;
+      top: 24px;
+      bottom: 24px;
+      width: 1px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+    }
+
+    .step {
+      display: flex;
+      gap: 20px;
+      padding: 0 0 36px;
+      position: relative;
+    }
+
+    .step:last-child {
+      padding-bottom: 0;
+    }
+
+    .step-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--cream);
+      border: 1px solid var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--serif);
+      font-size: 0.85rem;
+      color: var(--accent-dark);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .step-content {
+      padding-top: 6px;
+    }
+
+    .step-title {
+      font-family: var(--serif);
+      font-size: 1.1rem;
+      font-weight: 400;
+      margin-bottom: 4px;
+    }
+
+    .step-desc {
+      font-size: 0.8rem;
+      color: var(--mid);
+      line-height: 1.6;
+    }
+
+    /* ── INFO ── */
+    #info {
+      background: var(--charcoal);
+    }
+
+    #info .label {
+      color: var(--accent);
+    }
+
+    #info .label::before {
+      background: var(--accent);
+    }
+
+    #info .section-title {
+      color: var(--cream);
+    }
+
+    .info-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .info-list li {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .info-num {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 300;
+      color: var(--accent);
+      line-height: 1;
+      flex-shrink: 0;
+      min-width: 24px;
+    }
+
+    .info-text {
+      font-size: 0.82rem;
+      color: rgba(245, 242, 238, 0.7);
+      line-height: 1.7;
+      padding-top: 4px;
+    }
+
+    /* ── PAGAMENTO ── */
+    #pagamento {
+      background: var(--cream);
+    }
+
+    .payment-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .pay-card {
+      border: 1px solid var(--light-line);
+      border-radius: 16px;
+      padding: 24px 20px;
+      background: var(--warm-white);
+    }
+
+    .pay-icon {
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+    }
+
+    .pay-title {
+      font-family: var(--serif);
+      font-size: 1rem;
+      font-weight: 400;
+      margin-bottom: 6px;
+    }
+
+    .pay-desc {
+      font-size: 0.75rem;
+      color: var(--mid);
+      line-height: 1.5;
+    }
+
+    .pay-highlight {
+      display: inline-block;
+      margin-top: 8px;
+      background: #E8F5E3;
+      color: #4A7A3F;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--charcoal);
+      text-align: center;
+      padding: 80px 24px 60px;
+    }
+
+    #contact .label {
+      color: var(--accent);
+      justify-content: center;
+    }
+
+    #contact .label::before {
+      background: var(--accent);
+    }
+
+    #contact .section-title {
+      color: var(--cream);
+      text-align: center;
+    }
+
+    .contact-sub {
+      font-size: 0.85rem;
+      color: rgba(245, 242, 238, 0.6);
+      line-height: 1.7;
+      max-width: 280px;
+      margin: 16px auto 40px;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--cream);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      padding: 16px 28px;
+      border: 1px solid rgba(245, 242, 238, 0.2);
+      border-radius: 40px;
+      width: 100%;
+      max-width: 280px;
+      justify-content: center;
+      transition: border-color 0.3s, background 0.3s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .contact-link:active {
+      background: rgba(245, 242, 238, 0.08);
+    }
+
+    .contact-link.primary {
+      background: var(--accent-dark);
+      border-color: var(--accent-dark);
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px 24px;
+      background: #1E1D1B;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      color: rgba(245, 242, 238, 0.3);
+    }
+
+    footer strong {
+      color: rgba(245, 242, 238, 0.6);
+    }
+
+    /* ── REVEAL ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .reveal-delay-1 {
+      transition-delay: 0.1s;
+    }
+
+    .reveal-delay-2 {
+      transition-delay: 0.2s;
+    }
+
+    .reveal-delay-3 {
+      transition-delay: 0.3s;
+    }
+
+    /* ── FAB ── */
+    .fab {
+      position: fixed;
+      bottom: 28px;
+      right: 22px;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      background: #25D366;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+      text-decoration: none;
+      z-index: 90;
+      transition: transform 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .fab:active {
+      transform: scale(0.92);
+    }
+
+    .fab svg {
+      width: 26px;
+      height: 26px;
+      fill: #fff;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="loader">
+    <div class="loader-logo"><span>MALIZ</span> DESIGN</div>
+    <div class="loader-line"></div>
+  </div>
+
+  <nav id="nav">
+    <a href="#hero" class="nav-logo"><span>MALIZ</span> <em>design</em></a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about" class="menu-link">Sobre</a>
+    <a href="#portfolio" class="menu-link">Portfólio</a>
+    <a href="#packages" class="menu-link">Pacotes</a>
+    <a href="#process" class="menu-link">Processo</a>
+    <a href="#contact" class="menu-link">Contato</a>
+  </div>
+
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-tag">Designer de Identidade Visual</div>
+    <h1 class="hero-h1">Sua marca<em>com alma.</em></h1>
+    <p class="hero-sub">Identidades visuais estratégicas que conectam propósito, personalidade e valor.</p>
+    <div class="hero-cta">
+      <a href="#packages" class="btn-primary">Ver pacotes</a>
+      <a href="#portfolio" class="hero-scroll">portfólio ↓</a>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="label">Sobre mim</div>
+    <div class="about-photo reveal">
+      <img src="perfil.jpg" alt="Lizandra Alves">
+    </div>
+    <h2 class="section-title reveal">Lizandra <em>Alves</em></h2>
+    <p class="about-text reveal">Atuando no design desde 2019, desenvolvo identidades visuais estratégicas para marcas
+      que desejam se destacar. Com foco em posicionamento, autenticidade e sofisticação, crio projetos que vão além da
+      estética — conectando propósito, personalidade e valor.</p>
+    <div class="divider reveal"></div>
+    <div class="about-stats reveal">
+      <div class="stat">
+        <div class="stat-num">+6</div>
+        <div class="stat-label">Anos de experiência</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">100+</div>
+        <div class="stat-label">Marcas criadas</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">3</div>
+        <div class="stat-label">Áreas de atuação</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">∞</div>
+        <div class="stat-label">Dedicação</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="portfolio">
+    <div class="label">Portfólio</div>
+    <h2 class="section-title reveal">Projetos <em>recentes</em></h2>
+    <div class="portfolio-grid">
+      <div class="portfolio-item reveal">
+        <div class="portfolio-thumb"><img src="elan.jpg" alt="Elan"></div>
+        <div class="portfolio-info">
+          <div class="portfolio-name">Elan</div>
+          <div class="portfolio-cat">Identidade Visual · Papelaria</div>
+        </div>
+      </div>
+      <div class="portfolio-item reveal reveal-delay-1">
+        <div class="portfolio-thumb"><img src="mariagabi.jpg" alt="Maria Gabi Bronze"></div>
+        <div class="portfolio-info">
+          <div class="portfolio-name">Maria Gabi Bronze</div>
+          <div class="portfolio-cat">Identidade Visual</div>
+        </div>
+      </div>
+      <div class="portfolio-item reveal reveal-delay-2">
+        <div class="portfolio-thumb"><img src="raizes.jpg" alt="Clínica Raízes"></div>
+        <div class="portfolio-info">
+          <div class="portfolio-name">Clínica Raízes</div>
+          <div class="portfolio-cat">Identidade Visual</div>
+        </div>
+      </div>
+      <div class="portfolio-item reveal reveal-delay-3">
+        <div class="portfolio-thumb"><img src="lollafiore.jpg" alt="Use Myla"></div>
+        <div class="portfolio-info">
+          <div class="portfolio-name">Lolla Fiore</div>
+          <div class="portfolio-cat">Identidade Visual</div>
+        </div>
+      </div>
+      <div class="portfolio-item reveal reveal-delay-3">
+        <div class="portfolio-thumb"><img src="usemyla.jpg" alt="Use Myla"></div>
+        <div class="portfolio-info">
+          <div class="portfolio-name">Use Myla</div>
+          <div class="portfolio-cat">Identidade Visual</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="packages">
+    <div class="label">Pacotes</div>
+    <h2 class="section-title reveal">Invista na <em>sua marca</em></h2>
+    <div class="pkg-cards">
+
+      <div class="pkg-card reveal">
+        <div class="pkg-head">
+          <div class="pkg-name">Pacote</div>
+          <div class="pkg-title"><em>essência</em></div>
+          <div class="pkg-tagline">Para marcas que estão nascendo e precisam de base sólida.</div>
+          <div class="pkg-badge">Inicial</div>
+        </div>
+        <div class="pkg-body">
+          <div class="pkg-price"><sup>R$</sup>420</div>
+          <div class="pkg-for">Indicado para MEIs, autônomos e pequenos negócios</div>
+          <ul class="pkg-items">
+            <li>Logotipo principal</li>
+            <li>1 variação simplificada</li>
+            <li>Paleta estratégica de cores</li>
+            <li>Tipografia</li>
+            <li>Manual de marca</li>
+            <li>Mockups de apresentação</li>
+          </ul>
+        </div>
+        <div class="pkg-footer"><a
+            href="https://wa.me/5585989041523?text=Ol%C3%A1%2C%20Lizandra!%20Tenho%20interesse%20no%20Pacote%20Ess%C3%AAncia%20%F0%9F%8C%BF%20Pode%20me%20passar%20mais%20informa%C3%A7%C3%B5es%3F"
+            target="_blank" class="btn-pkg">Quero este pacote</a></div>
+      </div>
+
+      <div class="pkg-card featured reveal">
+        <div class="pkg-head">
+          <div class="pkg-name">Pacote</div>
+          <div class="pkg-title"><em>posicionamento</em></div>
+          <div class="pkg-tagline">Para marcas que querem se destacar e ser lembradas.</div>
+          <div class="pkg-badge">Popular</div>
+        </div>
+        <div class="pkg-body">
+          <div class="pkg-price"><sup>R$</sup>510</div>
+          <div class="pkg-for">Para negócios que querem crescer e fortalecer presença digital</div>
+          <ul class="pkg-items">
+            <li>Logotipo principal</li>
+            <li>2 logotipos alternativos</li>
+            <li>Submarca</li>
+            <li>Tipografia</li>
+            <li>Paleta estratégica de cores</li>
+            <li>Pattern exclusivo</li>
+            <li>Mockups + Manual de marca</li>
+            <li>5 capas destaques</li>
+            <li>4 templates editáveis para Instagram</li>
+          </ul>
+        </div>
+        <div class="pkg-footer"><a
+            href="https://wa.me/5585989041523?text=Ol%C3%A1%2C%20Lizandra!%20Tenho%20interesse%20no%20Pacote%20Posicionamento%20%E2%9C%A8%20Pode%20me%20passar%20mais%20informa%C3%A7%C3%B5es%3F"
+            target="_blank" class="btn-pkg">Quero este pacote</a></div>
+      </div>
+
+      <div class="pkg-card reveal">
+        <div class="pkg-head">
+          <div class="pkg-name">Pacote</div>
+          <div class="pkg-title"><em>expansão</em></div>
+          <div class="pkg-tagline">Sua marca sai da tela e ganha presença no mundo real.</div>
+          <div class="pkg-badge">Completo</div>
+        </div>
+        <div class="pkg-body">
+          <div class="pkg-price"><sup>R$</sup>620</div>
+          <div class="pkg-for">Para negócios com atendimento presencial ou envio de produtos</div>
+          <ul class="pkg-items">
+            <li>Logotipo principal + alternativo</li>
+            <li>Submarca</li>
+            <li>Paleta estratégica de cores</li>
+            <li>Tipografia</li>
+            <li>Pattern exclusivo</li>
+            <li>Mockups + Manual de marca</li>
+            <li>5 itens de papelaria (a consultar)</li>
+          </ul>
+        </div>
+        <div class="pkg-footer"><a
+            href="https://wa.me/5585989041523?text=Ol%C3%A1%2C%20Lizandra!%20Tenho%20interesse%20no%20Pacote%20Expans%C3%A3o%20%F0%9F%9A%80%20Pode%20me%20passar%20mais%20informa%C3%A7%C3%B5es%3F"
+            target="_blank" class="btn-pkg">Quero este pacote</a></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="itens">
+    <div class="label">Itens</div>
+    <h2 class="section-title reveal">À vulso</h2>
+    <p class="itens-intro reveal">Precisa de algo específico? Confira os itens disponíveis para comprar separadamente ou
+      complementar seu pacote.</p>
+    <div class="itens-grid reveal">
+      <div class="item-row"><span class="item-name">Cartão de Visitas</span><span class="item-price">R$70</span></div>
+      <div class="item-row"><span class="item-name">Cartão Digital</span><span class="item-price">R$140</span></div>
+      <div class="item-row"><span class="item-name">Papel Timbrado</span><span class="item-price">R$70</span></div>
+      <div class="item-row"><span class="item-name">Receituário Simples</span><span class="item-price">R$80</span></div>
+      <div class="item-row"><span class="item-name">Receituário Especial</span><span class="item-price">R$90</span>
+      </div>
+      <div class="item-row"><span class="item-name">Ficha de Anamnese</span><span class="item-price">R$120</span></div>
+      <div class="item-row"><span class="item-name">Decl. Comparecimento</span><span class="item-price">R$80</span>
+      </div>
+      <div class="item-row"><span class="item-name">Adesivo</span><span class="item-price">R$40</span></div>
+      <div class="item-row"><span class="item-name">Folheto</span><span class="item-price">R$60</span></div>
+      <div class="item-row"><span class="item-name">Cartão Agradecimento</span><span class="item-price">R$50</span>
+      </div>
+      <div class="item-row"><span class="item-name">Tag</span><span class="item-price">R$60</span></div>
+      <div class="item-row"><span class="item-name">Assinatura de E-mail</span><span class="item-price">R$60</span>
+      </div>
+      <div class="item-row"><span class="item-name">Lacre de Segurança</span><span class="item-price">R$60</span></div>
+      <div class="item-row"><span class="item-name">Cardápio (até 3 pág)</span><span class="item-price">R$150</span>
+      </div>
+      <div class="item-row"><span class="item-name">Capa Destaque Insta</span><span class="item-price">R$15</span></div>
+      <div class="item-row"><span class="item-name">Post Feed/Stories</span><span class="item-price">R$40</span></div>
+      <div class="item-row"><span class="item-name">Banner</span><span class="item-price">R$60</span></div>
+      <div class="item-row"><span class="item-name">Envelope D4 ou BL</span><span class="item-price">R$70</span></div>
+      <div class="item-row"><span class="item-name">Pasta A4</span><span class="item-price">R$70</span></div>
+      <div class="item-row"><span class="item-name">Certificado</span><span class="item-price">R$90</span></div>
+      <div class="item-row"><span class="item-name">Caixa</span><span class="item-price">R$60</span></div>
+      <div class="item-row"><span class="item-name">Recibo</span><span class="item-price">R$60</span></div>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="label">Como funciona</div>
+    <h2 class="section-title reveal">Etapas do <em>processo</em></h2>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">Escolha o pacote</div>
+          <div class="step-desc">Selecione 1 ou mais pacotes/serviços que atendam à sua marca.</div>
+        </div>
+      </div>
+      <div class="step reveal reveal-delay-1">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">Elaboração do contrato</div>
+          <div class="step-desc">Formalizamos o acordo com todos os detalhes do projeto e prazos.</div>
+        </div>
+      </div>
+      <div class="step reveal reveal-delay-2">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">Pagamento</div>
+          <div class="step-desc">Via Pix com 5% de desconto ou cartão de crédito parcelado.</div>
+        </div>
+      </div>
+      <div class="step reveal reveal-delay-3">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-title">Briefing</div>
+          <div class="step-desc">Você responde o briefing com tudo sobre sua marca e expectativas.</div>
+        </div>
+      </div>
+      <div class="step reveal">
+        <div class="step-num">5</div>
+        <div class="step-content">
+          <div class="step-title">Criação</div>
+          <div class="step-desc">Desenvolvemos sua identidade com dedicação e visão estratégica.</div>
+        </div>
+      </div>
+      <div class="step reveal reveal-delay-1">
+        <div class="step-num">6</div>
+        <div class="step-content">
+          <div class="step-title">Projeto entregue ✨</div>
+          <div class="step-desc">Sua marca pronta para conquistar o mundo!</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="info">
+    <div class="label">Informações</div>
+    <h2 class="section-title reveal"><em>Importantes</em></h2>
+    <ul class="info-list">
+      <li class="reveal">
+        <div class="info-num">1</div>
+        <p class="info-text">Urgência no prazo mediante taxa de 50% do valor contratado.</p>
+      </li>
+      <li class="reveal reveal-delay-1">
+        <div class="info-num">2</div>
+        <p class="info-text">Impressão de materiais não está inclusa nos pacotes.</p>
+      </li>
+      <li class="reveal reveal-delay-2">
+        <div class="info-num">3</div>
+        <p class="info-text">Registro da marca no INPI não está incluso.</p>
+      </li>
+      <li class="reveal reveal-delay-3">
+        <div class="info-num">4</div>
+        <p class="info-text">Alterações após aprovação dos arquivos: taxa de R$150.</p>
+      </li>
+      <li class="reveal">
+        <div class="info-num">5</div>
+        <p class="info-text">Arquivos armazenados por 90 dias. Salve em local seguro após receber.</p>
+      </li>
+    </ul>
+  </section>
+
+  <section id="pagamento">
+    <div class="label">Pagamento</div>
+    <h2 class="section-title reveal">Formas de <em>pagamento</em></h2>
+    <div class="payment-cards reveal">
+      <div class="pay-card">
+        <div class="pay-icon">⚡</div>
+        <div class="pay-title">À vista</div>
+        <div class="pay-desc">Pague via Pix com desconto especial.</div>
+        <span class="pay-highlight">5% OFF</span>
+      </div>
+      <div class="pay-card">
+        <div class="pay-icon">💳</div>
+        <div class="pay-title">Cartão</div>
+        <div class="pay-desc">Parcelamento no crédito com juros conforme parcelas.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="label">Contato</div>
+    <h2 class="section-title">Vamos criar <em>juntos?</em></h2>
+    <p class="contact-sub">Será um enorme prazer te atender! Estou sempre disponível para conversar sobre sua marca.</p>
+    <div class="contact-links">
+      <a href="https://wa.me/5585989041523" class="contact-link primary"> WhatsApp</a>
+      <a href="https://instagram.com/malizdesign" class="contact-link"> @malizdesign</a>
+      <a href="mailto:malizdesign@outlook.com" class="contact-link"> E-mail</a>
+    </div>
+  </section>
+
+  <footer>
+    <strong>MALIZ DESIGN</strong> · © 2026 · Todos os direitos reservados
+  </footer>
+
+  <a href="https://wa.me/5585989041523" class="fab" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+    </svg>
+  </a>
+
+  <script>
+    window.addEventListener('load', () => {
+      setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1800);
+    });
+
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+    document.querySelectorAll('.menu-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    let lastScroll = 0;
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      const current = window.scrollY;
+      if (current > lastScroll && current > 80) nav.classList.add('hidden');
+      else nav.classList.remove('hidden');
+      lastScroll = current;
+    }, { passive: true });
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+
+</html>
