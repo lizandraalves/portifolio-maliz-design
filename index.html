@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <title>Maliz Design — Lizandra Alves</title>
+  <link rel="icon" type="image/png" href="image.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
@@ -998,333 +999,331 @@
     }
 
     footer strong {
-      color: rgba(245, 242, 238, 0.6);
+      color: rgba(245, 242, 238, 0.5);
     }
 
-    /* ── REVEAL ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.7s ease, transform 0.7s ease;
+    @media (min-width: 768px) {
+      nav {
+        padding: 24px 48px;
+      }
+
+      #hero {
+        padding: 0 48px 120px;
+      }
+
+      section {
+        padding: 120px 48px;
+      }
+
+      .portfolio-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+
+      .portfolio-item:first-child {
+        grid-column: 1 / 2;
+      }
+
+      .about-stats {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+
+      .payment-cards {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+      }
+
+      .itens-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+
+      .hero-h1 {
+        font-size: clamp(4rem, 10vw, 5.5rem);
+      }
+
+      .contact-link {
+        width: auto;
+        max-width: none;
+      }
     }
 
-    .reveal.visible {
-      opacity: 1;
-      transform: none;
-    }
+    @media (min-width: 1024px) {
+      nav {
+        padding: 28px 80px;
+      }
 
-    .reveal-delay-1 {
-      transition-delay: 0.1s;
-    }
+      #hero {
+        padding: 0 80px 140px;
+      }
 
-    .reveal-delay-2 {
-      transition-delay: 0.2s;
-    }
+      section {
+        padding: 140px 80px;
+      }
 
-    .reveal-delay-3 {
-      transition-delay: 0.3s;
-    }
+      .about-stats {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+      }
 
-    /* ── FAB ── */
-    .fab {
-      position: fixed;
-      bottom: 28px;
-      right: 22px;
-      width: 54px;
-      height: 54px;
-      border-radius: 50%;
-      background: #25D366;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-      text-decoration: none;
-      z-index: 90;
-      transition: transform 0.2s;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .fab:active {
-      transform: scale(0.92);
-    }
-
-    .fab svg {
-      width: 26px;
-      height: 26px;
-      fill: #fff;
+      .payment-cards {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+      }
     }
   </style>
 </head>
 
 <body>
-
   <div id="loader">
-    <div class="loader-logo"><span>MALIZ</span> DESIGN</div>
+    <div class="loader-logo">M<span>aliz</span></div>
     <div class="loader-line"></div>
   </div>
 
-  <nav id="nav">
-    <a href="#hero" class="nav-logo"><span>MALIZ</span> <em>DESIGN</em></a>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
+  <nav>
+    <a href="#hero" class="nav-logo">M<em>aliz</em></a>
+    <button class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
   </nav>
 
   <div class="mobile-menu" id="mobileMenu">
-    <a href="#about" class="menu-link">Sobre</a>
-    <a href="#portfolio" class="menu-link">Portfólio</a>
-    <a href="#packages" class="menu-link">Pacotes</a>
-    <a href="#process" class="menu-link">Processo</a>
-    <a href="#contact" class="menu-link">Contato</a>
+    <a href="#about">Sobre</a>
+    <a href="#portfolio">Portfólio</a>
+    <a href="#packages">Pacotes</a>
+    <a href="#process">Processo</a>
+    <a href="#contact">Contato</a>
   </div>
 
   <section id="hero">
     <div class="hero-bg"></div>
-    <div class="hero-tag">Designer de Identidade Visual</div>
-    <h1 class="hero-h1">Transformando ideias<em>em marcas memoráveis.</em></h1>
-    <p class="hero-sub">Identidades visuais estratégicas que conectam propósito, personalidade e valor.</p>
+    <div class="hero-img-wrap">Imagem Principal</div>
+    <div class="hero-tag">
+      Design | Branding | Web
+    </div>
+    <h1 class="hero-h1">
+      Criatividade e <em>Estratégia</em>
+    </h1>
+    <p class="hero-sub">
+      Transformo ideias em projetos visuais que conectam marca e público.
+    </p>
     <div class="hero-cta">
-      <a href="#packages" class="btn-primary">Ver pacotes</a>
-      <a href="#portfolio" class="hero-scroll">portfólio ↓</a>
+      <a href="#contact" class="btn-primary">
+        Começar Projeto ↗
+      </a>
+      <a href="#portfolio" class="hero-scroll">Ver trabalhos</a>
     </div>
   </section>
 
   <section id="about">
-    <div class="label">Sobre mim</div>
-    <div class="about-photo reveal">
-      <img src="perfil.jpg" alt="Lizandra Alves">
-    </div>
-    <h2 class="section-title reveal">Lizandra <em>Alves</em></h2>
-    <p class="about-text reveal">Atuando no design desde 2019, desenvolvo identidades visuais estratégicas para marcas
-      que desejam se destacar. Com foco em posicionamento, autenticidade e sofisticação, crio projetos que vão além da
-      estética — conectando propósito, personalidade e valor.</p>
-    <div class="divider reveal"></div>
-    <div class="about-stats reveal">
+    <div class="label">Sobre</div>
+    <h2 class="section-title">Lizandra <em>Alves</em></h2>
+
+    <div class="about-photo">Foto de Perfil</div>
+
+    <p class="about-text">
+      Sou designer multidisciplinar com paixão por criar identidades visuais que ressoam com o público. Com mais de 5 anos de experiência, trabalho com branding, design gráfico e desenvolvimento web para ajudar marcas a se destacarem.
+    </p>
+
+    <div class="divider"></div>
+
+    <div class="about-stats">
       <div class="stat">
-        <div class="stat-num">+6</div>
-        <div class="stat-label">Anos de experiência</div>
+        <div class="stat-num">50+</div>
+        <div class="stat-label">Projetos</div>
       </div>
       <div class="stat">
-        <div class="stat-num">100+</div>
-        <div class="stat-label">Marcas criadas</div>
+        <div class="stat-num">30+</div>
+        <div class="stat-label">Clientes</div>
       </div>
       <div class="stat">
-        <div class="stat-num">3</div>
-        <div class="stat-label">Áreas de atuação</div>
+        <div class="stat-num">5+</div>
+        <div class="stat-label">Anos</div>
       </div>
       <div class="stat">
-        <div class="stat-num">∞</div>
-        <div class="stat-label">Dedicação</div>
+        <div class="stat-num">15</div>
+        <div class="stat-label">Prêmios</div>
       </div>
     </div>
   </section>
 
   <section id="portfolio">
     <div class="label">Portfólio</div>
-    <h2 class="section-title reveal">Projetos <em>recentes</em></h2>
+    <h2 class="section-title">Trabalhos <em>Recentes</em></h2>
+
     <div class="portfolio-grid">
-      <div class="portfolio-item reveal">
-        <div class="portfolio-thumb"><img src="elan.jpg" alt="Elan"></div>
+      <div class="portfolio-item">
+        <div class="portfolio-thumb">Projeto 1</div>
         <div class="portfolio-info">
-          <div class="portfolio-name">Elan</div>
-          <div class="portfolio-cat">Identidade Visual · Papelaria</div>
+          <h3 class="portfolio-name">Projeto Principal</h3>
+          <p class="portfolio-cat">Branding</p>
         </div>
       </div>
-      <div class="portfolio-item reveal reveal-delay-1">
-        <div class="portfolio-thumb"><img src="mariagabi.jpg" alt="Maria Gabi Bronze"></div>
+      <div class="portfolio-item">
+        <div class="portfolio-thumb">Projeto 2</div>
         <div class="portfolio-info">
-          <div class="portfolio-name">Maria Gabi Bronze</div>
-          <div class="portfolio-cat">Identidade Visual</div>
+          <h3 class="portfolio-name">Design Web</h3>
+          <p class="portfolio-cat">Web Design</p>
         </div>
       </div>
-      <div class="portfolio-item reveal reveal-delay-2">
-        <div class="portfolio-thumb"><img src="raizes.jpg" alt="Clínica Raízes"></div>
+      <div class="portfolio-item">
+        <div class="portfolio-thumb">Projeto 3</div>
         <div class="portfolio-info">
-          <div class="portfolio-name">Clínica Raízes</div>
-          <div class="portfolio-cat">Identidade Visual</div>
+          <h3 class="portfolio-name">Identidade Visual</h3>
+          <p class="portfolio-cat">Branding</p>
         </div>
       </div>
-      <div class="portfolio-item reveal reveal-delay-3">
-        <div class="portfolio-thumb"><img src="lollafiore.jpg" alt="Use Myla"></div>
+      <div class="portfolio-item">
+        <div class="portfolio-thumb">Projeto 4</div>
         <div class="portfolio-info">
-          <div class="portfolio-name">Lolla Fiore</div>
-          <div class="portfolio-cat">Identidade Visual</div>
-        </div>
-      </div>
-      <div class="portfolio-item reveal reveal-delay-3">
-        <div class="portfolio-thumb"><img src="usemyla.jpg" alt="Use Myla"></div>
-        <div class="portfolio-info">
-          <div class="portfolio-name">Use Myla</div>
-          <div class="portfolio-cat">Identidade Visual</div>
+          <h3 class="portfolio-name">Campanha Digital</h3>
+          <p class="portfolio-cat">Design Gráfico</p>
         </div>
       </div>
     </div>
   </section>
 
   <section id="packages">
-    <div class="label">Pacotes</div>
-    <h2 class="section-title reveal">Invista na <em>sua marca</em></h2>
+    <div class="label">Serviços</div>
+    <h2 class="section-title">Pacotes <em>Disponíveis</em></h2>
+
     <div class="pkg-cards">
-
-      <div class="pkg-card reveal">
+      <div class="pkg-card">
         <div class="pkg-head">
+          <div class="pkg-badge">BÁSICO</div>
           <div class="pkg-name">Pacote</div>
-          <div class="pkg-title"><em>essência</em></div>
-          <div class="pkg-tagline">Para marcas que estão nascendo e precisam de base sólida.</div>
-          <div class="pkg-badge">Inicial</div>
+          <h3 class="pkg-title">Logo <em>Design</em></h3>
+          <p class="pkg-tagline">Identidade visual completa para sua marca</p>
         </div>
         <div class="pkg-body">
-          <div class="pkg-price"><sup>R$</sup>420</div>
-          <div class="pkg-for">Indicado para MEIs, autônomos e pequenos negócios</div>
+          <div class="pkg-price"><sup>R$</sup>1.200</div>
+          <div class="pkg-for">Ideal para startups</div>
           <ul class="pkg-items">
-            <li>Logotipo principal</li>
-            <li>1 variação simplificada</li>
-            <li>Paleta estratégica de cores</li>
-            <li>Tipografia</li>
+            <li>Logo em 3 formatos</li>
+            <li>Paleta de cores</li>
+            <li>Tipografia sugerida</li>
+            <li>1 revisão</li>
+          </ul>
+        </div>
+        <div class="pkg-footer">
+          <a href="#contact" class="btn-pkg">Escolher</a>
+        </div>
+      </div>
+
+      <div class="pkg-card featured">
+        <div class="pkg-head">
+          <div class="pkg-badge">POPULAR</div>
+          <div class="pkg-name">Pacote</div>
+          <h3 class="pkg-title">Brand <em>Identity</em></h3>
+          <p class="pkg-tagline">Tudo para sua marca decolar</p>
+        </div>
+        <div class="pkg-body">
+          <div class="pkg-price"><sup>R$</sup>3.500</div>
+          <div class="pkg-for">Recomendado</div>
+          <ul class="pkg-items">
+            <li>Logo + Variações</li>
             <li>Manual de marca</li>
-            <li>Mockups de apresentação</li>
+            <li>Aplicações básicas</li>
+            <li>5 revisões</li>
+            <li>Consultoria</li>
           </ul>
         </div>
-        <div class="pkg-footer"><a
-            href="https://wa.me/5585989041523?text=Ol%C3%A1%2C%20Lizandra!%20Tenho%20interesse%20no%20Pacote%20Ess%C3%AAncia%20%F0%9F%8C%BF%20Pode%20me%20passar%20mais%20informa%C3%A7%C3%B5es%3F"
-            target="_blank" class="btn-pkg">Quero este pacote</a></div>
+        <div class="pkg-footer">
+          <a href="#contact" class="btn-pkg">Escolher</a>
+        </div>
       </div>
 
-      <div class="pkg-card featured reveal">
+      <div class="pkg-card">
         <div class="pkg-head">
+          <div class="pkg-badge">PREMIUM</div>
           <div class="pkg-name">Pacote</div>
-          <div class="pkg-title"><em>posicionamento</em></div>
-          <div class="pkg-tagline">Para marcas que querem se destacar e ser lembradas.</div>
-          <div class="pkg-badge">Popular</div>
+          <h3 class="pkg-title">Complete <em>Design</em></h3>
+          <p class="pkg-tagline">Solução completa e personalizada</p>
         </div>
         <div class="pkg-body">
-          <div class="pkg-price"><sup>R$</sup>510</div>
-          <div class="pkg-for">Para negócios que querem crescer e fortalecer presença digital</div>
+          <div class="pkg-price"><sup>R$</sup>7.500</div>
+          <div class="pkg-for">Grandes projetos</div>
           <ul class="pkg-items">
-            <li>Logotipo principal</li>
-            <li>2 logotipos alternativos</li>
-            <li>Submarca</li>
-            <li>Tipografia</li>
-            <li>Paleta estratégica de cores</li>
-            <li>Pattern exclusivo</li>
-            <li>Mockups + Manual de marca</li>
-            <li>5 capas destaques</li>
-            <li>4 templates editáveis para Instagram</li>
+            <li>Identidade visual completa</li>
+            <li>Manual de marca expandido</li>
+            <li>Design de website</li>
+            <li>Revisões ilimitadas</li>
+            <li>Suporte 3 meses</li>
           </ul>
         </div>
-        <div class="pkg-footer"><a
-            href="https://wa.me/5585989041523?text=Ol%C3%A1%2C%20Lizandra!%20Tenho%20interesse%20no%20Pacote%20Posicionamento%20%E2%9C%A8%20Pode%20me%20passar%20mais%20informa%C3%A7%C3%B5es%3F"
-            target="_blank" class="btn-pkg">Quero este pacote</a></div>
-      </div>
-
-      <div class="pkg-card reveal">
-        <div class="pkg-head">
-          <div class="pkg-name">Pacote</div>
-          <div class="pkg-title"><em>expansão</em></div>
-          <div class="pkg-tagline">Sua marca sai da tela e ganha presença no mundo real.</div>
-          <div class="pkg-badge">Completo</div>
+        <div class="pkg-footer">
+          <a href="#contact" class="btn-pkg">Escolher</a>
         </div>
-        <div class="pkg-body">
-          <div class="pkg-price"><sup>R$</sup>620</div>
-          <div class="pkg-for">Para negócios com atendimento presencial ou envio de produtos</div>
-          <ul class="pkg-items">
-            <li>Logotipo principal + alternativo</li>
-            <li>Submarca</li>
-            <li>Paleta estratégica de cores</li>
-            <li>Tipografia</li>
-            <li>Pattern exclusivo</li>
-            <li>Mockups + Manual de marca</li>
-            <li>5 itens de papelaria (a consultar)</li>
-          </ul>
-        </div>
-        <div class="pkg-footer"><a
-            href="https://wa.me/5585989041523?text=Ol%C3%A1%2C%20Lizandra!%20Tenho%20interesse%20no%20Pacote%20Expans%C3%A3o%20%F0%9F%9A%80%20Pode%20me%20passar%20mais%20informa%C3%A7%C3%B5es%3F"
-            target="_blank" class="btn-pkg">Quero este pacote</a></div>
       </div>
-
     </div>
   </section>
 
   <section id="itens">
-    <div class="label">Itens</div>
-    <h2 class="section-title reveal">À vulso</h2>
-    <p class="itens-intro reveal">Precisa de algo específico? Confira os itens disponíveis para comprar separadamente ou
-      complementar seu pacote.</p>
-    <div class="itens-grid reveal">
-      <div class="item-row"><span class="item-name">Cartão de Visitas</span><span class="item-price">R$70</span></div>
-      <div class="item-row"><span class="item-name">Cartão Digital</span><span class="item-price">R$140</span></div>
-      <div class="item-row"><span class="item-name">Papel Timbrado</span><span class="item-price">R$70</span></div>
-      <div class="item-row"><span class="item-name">Receituário Simples</span><span class="item-price">R$80</span></div>
-      <div class="item-row"><span class="item-name">Receituário Especial</span><span class="item-price">R$90</span>
+    <div class="label">À La Carte</div>
+    <h2 class="section-title">Serviços <em>Pontuais</em></h2>
+    <p class="itens-intro">
+      Não precisa de um pacote completo? Escolha apenas o que você precisa:
+    </p>
+
+    <div class="itens-grid">
+      <div class="item-row">
+        <div class="item-name">Consultoria de Marca</div>
+        <div class="item-price">R$ 400</div>
       </div>
-      <div class="item-row"><span class="item-name">Ficha de Anamnese</span><span class="item-price">R$120</span></div>
-      <div class="item-row"><span class="item-name">Decl. Comparecimento</span><span class="item-price">R$80</span>
+      <div class="item-row">
+        <div class="item-name">Design de Apresentação</div>
+        <div class="item-price">R$ 600</div>
       </div>
-      <div class="item-row"><span class="item-name">Adesivo</span><span class="item-price">R$40</span></div>
-      <div class="item-row"><span class="item-name">Folheto</span><span class="item-price">R$60</span></div>
-      <div class="item-row"><span class="item-name">Cartão Agradecimento</span><span class="item-price">R$50</span>
+      <div class="item-row">
+        <div class="item-name">Social Media Kit</div>
+        <div class="item-price">R$ 800</div>
       </div>
-      <div class="item-row"><span class="item-name">Tag</span><span class="item-price">R$60</span></div>
-      <div class="item-row"><span class="item-name">Assinatura de E-mail</span><span class="item-price">R$60</span>
+      <div class="item-row">
+        <div class="item-name">Revisão Criativa</div>
+        <div class="item-price">R$ 300</div>
       </div>
-      <div class="item-row"><span class="item-name">Lacre de Segurança</span><span class="item-price">R$60</span></div>
-      <div class="item-row"><span class="item-name">Cardápio (até 3 pág)</span><span class="item-price">R$150</span>
+      <div class="item-row">
+        <div class="item-name">Design de Embalagem</div>
+        <div class="item-price">R$ 1.200</div>
       </div>
-      <div class="item-row"><span class="item-name">Capa Destaque Insta</span><span class="item-price">R$15</span></div>
-      <div class="item-row"><span class="item-name">Post Feed/Stories</span><span class="item-price">R$40</span></div>
-      <div class="item-row"><span class="item-name">Banner</span><span class="item-price">R$60</span></div>
-      <div class="item-row"><span class="item-name">Envelope D4 ou BL</span><span class="item-price">R$70</span></div>
-      <div class="item-row"><span class="item-name">Pasta A4</span><span class="item-price">R$70</span></div>
-      <div class="item-row"><span class="item-name">Certificado</span><span class="item-price">R$90</span></div>
-      <div class="item-row"><span class="item-name">Caixa</span><span class="item-price">R$60</span></div>
-      <div class="item-row"><span class="item-name">Recibo</span><span class="item-price">R$60</span></div>
+      <div class="item-row">
+        <div class="item-name">Ilustração Customizada</div>
+        <div class="item-price">R$ 900</div>
+      </div>
     </div>
   </section>
 
   <section id="process">
-    <div class="label">Como funciona</div>
-    <h2 class="section-title reveal">Etapas do <em>processo</em></h2>
+    <div class="label">Processo</div>
+    <h2 class="section-title">Como <em>Trabalho</em></h2>
+
     <div class="steps">
-      <div class="step reveal">
+      <div class="step">
         <div class="step-num">1</div>
         <div class="step-content">
-          <div class="step-title">Escolha o pacote</div>
-          <div class="step-desc">Selecione 1 ou mais pacotes/serviços que atendam à sua marca.</div>
+          <h3 class="step-title">Descoberta</h3>
+          <p class="step-desc">Conheço sua marca, mercado e objetivos para entender a melhor solução</p>
         </div>
       </div>
-      <div class="step reveal reveal-delay-1">
+
+      <div class="step">
         <div class="step-num">2</div>
         <div class="step-content">
-          <div class="step-title">Elaboração do contrato</div>
-          <div class="step-desc">Formalizamos o acordo com todos os detalhes do projeto e prazos.</div>
+          <h3 class="step-title">Conceituação</h3>
+          <p class="step-desc">Desenvolvo conceitos visuais alinhados com sua identidade</p>
         </div>
       </div>
-      <div class="step reveal reveal-delay-2">
+
+      <div class="step">
         <div class="step-num">3</div>
         <div class="step-content">
-          <div class="step-title">Pagamento</div>
-          <div class="step-desc">Via Pix com 5% de desconto ou cartão de crédito parcelado.</div>
+          <h3 class="step-title">Apresentação</h3>
+          <p class="step-desc">Apresento as propostas e colho seu feedback para refinamento</p>
         </div>
       </div>
-      <div class="step reveal reveal-delay-3">
+
+      <div class="step">
         <div class="step-num">4</div>
         <div class="step-content">
-          <div class="step-title">Briefing</div>
-          <div class="step-desc">Você responde o briefing com tudo sobre sua marca e expectativas.</div>
-        </div>
-      </div>
-      <div class="step reveal">
-        <div class="step-num">5</div>
-        <div class="step-content">
-          <div class="step-title">Criação</div>
-          <div class="step-desc">Desenvolvemos sua identidade com dedicação e visão estratégica.</div>
-        </div>
-      </div>
-      <div class="step reveal reveal-delay-1">
-        <div class="step-num">6</div>
-        <div class="step-content">
-          <div class="step-title">Projeto entregue ✨</div>
-          <div class="step-desc">Sua marca pronta para conquistar o mundo!</div>
+          <h3 class="step-title">Finalização</h3>
+          <p class="step-desc">Entrego os arquivos finais em todos os formatos necessários</p>
         </div>
       </div>
     </div>
@@ -1332,104 +1331,142 @@
 
   <section id="info">
     <div class="label">Informações</div>
-    <h2 class="section-title reveal"><em>Importantes</em></h2>
+    <h2 class="section-title">Tudo que você <em>precisa saber</em></h2>
+
     <ul class="info-list">
-      <li class="reveal">
-        <div class="info-num">1</div>
-        <p class="info-text">Urgência no prazo mediante taxa de 50% do valor contratado.</p>
+      <li>
+        <div class="info-num">01</div>
+        <div class="info-text">
+          <strong>Prazo de Entrega:</strong> Projetos são entregues em até 15 dias úteis, conforme complexidade.
+        </div>
       </li>
-      <li class="reveal reveal-delay-1">
-        <div class="info-num">2</div>
-        <p class="info-text">Impressão de materiais não está inclusa nos pacotes.</p>
+      <li>
+        <div class="info-num">02</div>
+        <div class="info-text">
+          <strong>Revisões Incluídas:</strong> Cada pacote inclui o número de revisões descrito. Além disso é cobrado.
+        </div>
       </li>
-      <li class="reveal reveal-delay-2">
-        <div class="info-num">3</div>
-        <p class="info-text">Registro da marca no INPI não está incluso.</p>
+      <li>
+        <div class="info-num">03</div>
+        <div class="info-text">
+          <strong>Direitos Autorais:</strong> Todos os arquivos e designs são de sua propriedade após pagamento.
+        </div>
       </li>
-      <li class="reveal reveal-delay-3">
-        <div class="info-num">4</div>
-        <p class="info-text">Alterações após aprovação dos arquivos: taxa de R$150.</p>
-      </li>
-      <li class="reveal">
-        <div class="info-num">5</div>
-        <p class="info-text">Arquivos armazenados por 90 dias. Salve em local seguro após receber.</p>
+      <li>
+        <div class="info-num">04</div>
+        <div class="info-text">
+          <strong>Formato de Arquivos:</strong> Entrego em PDF, PNG, AI, PSD e formatos web conforme necessário.
+        </div>
       </li>
     </ul>
   </section>
 
   <section id="pagamento">
     <div class="label">Pagamento</div>
-    <h2 class="section-title reveal">Formas de <em>pagamento</em></h2>
-    <div class="payment-cards reveal">
-      <div class="pay-card">
-        <div class="pay-icon">⚡</div>
-        <div class="pay-title">À vista</div>
-        <div class="pay-desc">Pague via Pix com desconto especial.</div>
-        <span class="pay-highlight">5% OFF</span>
-      </div>
+    <h2 class="section-title">Formas de <em>Pagamento</em></h2>
+
+    <div class="payment-cards">
       <div class="pay-card">
         <div class="pay-icon">💳</div>
-        <div class="pay-title">Cartão</div>
-        <div class="pay-desc">Parcelamento no crédito com juros conforme parcelas.</div>
+        <h3 class="pay-title">Cartão de Crédito</h3>
+        <p class="pay-desc">Parcelado em até 12x sem juros</p>
+        <span class="pay-highlight">12x sem juros</span>
+      </div>
+
+      <div class="pay-card">
+        <div class="pay-icon">🏦</div>
+        <h3 class="pay-title">Transferência Bancária</h3>
+        <p class="pay-desc">Desconto de 5% para pagamento à vista</p>
+        <span class="pay-highlight">-5% à vista</span>
+      </div>
+
+      <div class="pay-card">
+        <div class="pay-icon">📱</div>
+        <h3 class="pay-title">Pix</h3>
+        <p class="pay-desc">Acesso instantâneo após confirmação</p>
+        <span class="pay-highlight">Instantâneo</span>
+      </div>
+
+      <div class="pay-card">
+        <div class="pay-icon">📌</div>
+        <h3 class="pay-title">Boleto</h3>
+        <p class="pay-desc">Vencimento em 3 dias úteis</p>
+        <span class="pay-highlight">Tradicional</span>
       </div>
     </div>
   </section>
 
   <section id="contact">
     <div class="label">Contato</div>
-    <h2 class="section-title">Vamos criar <em>juntos?</em></h2>
-    <p class="contact-sub">Será um enorme prazer te atender! Estou sempre disponível para conversar sobre sua marca.</p>
+    <h2 class="section-title">Vamos criar <em>algo incrível?</em></h2>
+    <p class="contact-sub">
+      Tenho interesse em projetos desafiadores e colaborações criativas. Envie uma mensagem!
+    </p>
+
     <div class="contact-links">
-      <a href="https://wa.me/5585989041523" class="contact-link primary"> WhatsApp</a>
-      <a href="https://instagram.com/malizdesign" class="contact-link"> @malizdesign</a>
-      <a href="mailto:malizdesign@outlook.com" class="contact-link"> E-mail</a>
+      <a href="mailto:contato@lizandraalves.com" class="contact-link primary">
+        ✉️ contato@lizandraalves.com
+      </a>
+      <a href="https://instagram.com/maliz.design" target="_blank" class="contact-link">
+        📱 @maliz.design
+      </a>
+      <a href="https://wa.me/5511999999999" target="_blank" class="contact-link">
+        💬 Whatsapp
+      </a>
     </div>
   </section>
 
   <footer>
-    <strong>MALIZ DESIGN</strong> · © 2026 · Todos os direitos reservados
+    <strong>Maliz Design</strong> © 2024. Todos os direitos reservados. | Desenvolvido com ❤️
   </footer>
 
-  <a href="https://wa.me/5585989041523" class="fab" aria-label="WhatsApp">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-      <path
-        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-    </svg>
-  </a>
-
   <script>
+    // Loader
     window.addEventListener('load', () => {
-      setTimeout(() => document.getElementById('loader').classList.add('hidden'), 1800);
+      const loader = document.getElementById('loader');
+      setTimeout(() => loader.classList.add('hidden'), 1500);
     });
 
+    // Mobile Menu
     const hamburger = document.getElementById('hamburger');
     const mobileMenu = document.getElementById('mobileMenu');
+
     hamburger.addEventListener('click', () => {
       hamburger.classList.toggle('open');
       mobileMenu.classList.toggle('open');
-      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
     });
-    document.querySelectorAll('.menu-link').forEach(link => {
+
+    mobileMenu.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         hamburger.classList.remove('open');
         mobileMenu.classList.remove('open');
-        document.body.style.overflow = '';
       });
     });
 
-    let lastScroll = 0;
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      const current = window.scrollY;
-      if (current > lastScroll && current > 80) nav.classList.add('hidden');
-      else nav.classList.remove('hidden');
-      lastScroll = current;
-    }, { passive: true });
+    // Hide Nav on Scroll
+    let lastScrollTop = 0;
+    const nav = document.querySelector('nav');
 
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    window.addEventListener('scroll', () => {
+      let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+      if (currentScroll > lastScrollTop && currentScroll > 100) {
+        nav.classList.add('hidden');
+      } else {
+        nav.classList.remove('hidden');
+      }
+      lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+    });
+
+    // Smooth Scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
   </script>
 </body>
 
